@@ -9,17 +9,24 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
   _config: {
-    actions: true,
+    actions: false,
     shortcuts: false,
     rest: false
   },
-
   async signup(req, res) {
     try {
-      const user = await User.create(req.body);
-      return res.json({ user, token: jwtService.sign(user) });
+      const { body: { email } } = req;
+      const userExists = await User.findOne({ email });
+      if (userExists) {
+        return res.json(400, { err: 'Email already taken' });
+      }
+      const _user = await User.create(req.body).fetch();
+      const token = jwtService.sign(_user);
+      const user = await User.updateOne({ id: _user.id }).set({ token });
+      const payload = { user, token };
+      return res.json(payload);
     } catch (err) {
-      return req.serverError(err);
+      return res.serverError(err);
     }
   },
 
@@ -36,10 +43,11 @@ module.exports = {
       if (!user) {
         return res.notFound({ err: 'Could not find email,' + email + ' sorry.' });
       }
-
       const isValid = await bcrypt.compare(password, user.password);
       if (isValid) {
-        return res.json({ user, token: jwtService.sign(user) });
+        const token = jwtService.sign(user);
+        const _user = User.updateOne({ id: user.id }).set({ token });
+        return res.json({ _user, token });
       }
       else { return res.forbidden({ err: 'Invalid password' }); }
 

@@ -24,9 +24,12 @@ module.exports = {
       type: 'number',
       defaultsTo: 0,
     },
+    'token': {
+      type: 'string',
+      allowNull: true,
+    },
     'password': {
       type: 'string',
-      required: true
     },
   },
 
@@ -47,11 +50,9 @@ module.exports = {
       cb();
     });
   },
-
   customToJSON: function () {
-    // Return a shallow copy of this record with the password and ssn removed.
-    return _.omit(this, ['password']);
-  }
+    return _.omit(this, ['password', 'token']);
+  },
 
 };
 
