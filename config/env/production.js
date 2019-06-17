@@ -9,7 +9,7 @@ module.exports = {
   },
   models: {
     datastore: 'mongo',
-    migrate: 'alter',
+    migrate: 'safe',
   },
   blueprints: {
     rest: false,
