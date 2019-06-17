@@ -16,4 +16,12 @@ module.exports = {
     actions: false,
     shortcuts: false,
   },
+  session: {
+    cookie: {
+      secure: true,
+    }
+  },
+  sockets: {
+    onlyAllowOrigins: '*',
+  }
 };
