@@ -22,6 +22,6 @@ module.exports = {
     }
   },
   sockets: {
-    onlyAllowOrigins: '*',
+    onlyAllowOrigins: ['*'],
   }
 };
