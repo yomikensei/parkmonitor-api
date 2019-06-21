@@ -14,6 +14,10 @@ module.exports = {
       type: 'string',
       required: true
     },
+    'coordinates': {
+      type: 'json',
+      required: true
+    },
     'isOccupied': {
       type: 'boolean',
       defaultsTo: false,
