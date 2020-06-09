@@ -48,6 +48,14 @@ module.exports.routes = {
     controller: 'SlotController',
     action: 'list',
   },
+  'PUT /slot/entry': {
+    controller: 'SlotController',
+    action: 'entry',
+  },
+  'PUT /slot/exit/:id': {
+    controller: 'SlotController',
+    action: 'exit',
+  },
 
   // Reservation
   'POST /reservation': {

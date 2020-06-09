@@ -45,4 +45,33 @@ module.exports = {
       return ResponseHelper.error(e, res);
     }
   },
+
+  entry: async (req, res) => {
+    try {
+      const { plate, slot: slot_id } = req.body;
+      let slot = await Slot.findOne(slot_id).populate('reservation');
+      if (!slot) return ResponseHelper.json(400, res, 'Slot not found');
+      const vehicle = await Vehicle.findOne({ plate });
+      if (!vehicle) return ResponseHelper.json(400, res, 'Vehicle not found');
+      if (!slot.reservation) return ResponseHelper.json(400, res, 'Slot has no reservation for the owner of this vehicle');
+      if (slot.reservation.user !== vehicle.user)
+        return ResponseHelper.json(400, res, 'Slot has no reservation for the owner of this vehicle');
+      slot = await Slot.updateOne(slot_id).set({ occupied_by: vehicle.id });
+      return ResponseHelper.json(200, res, 'Slot entry approved', slot);
+    } catch (e) {
+      return ResponseHelper.error(e, res);
+    }
+  },
+
+  exit: async (req, res) => {
+    try {
+      const { id: slot_id } = req.params;
+      let slot = await Slot.findOne(slot_id);
+      if (!slot) return ResponseHelper.json(400, res, 'Slot not found');
+      slot = await Slot.updateOne(slot_id).set({ occupied_by: null });
+      return ResponseHelper.json(200, res, 'Slot exit successful', slot);
+    } catch (e) {
+      return ResponseHelper.error(e, res);
+    }
+  },
 };
