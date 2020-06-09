@@ -1,4 +1,4 @@
-# parkmonitor-pi
+# parkmonitor-api
 
 API to store and retrieve parking data from a raspberry pi
 
