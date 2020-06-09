@@ -9,22 +9,35 @@
  * https://sailsjs.com/config/bootstrap
  */
 
-module.exports.bootstrap = async function() {
+const _ = require('lodash');
+const Bcrypt = require('bcrypt');
+const Crypto = require('crypto');
+const Moment = require('moment');
+const Raven = require('raven');
+const ResponseHelper = require('@dsninjas/response');
+const { v4: uuidv4 } = require('uuid');
 
-  // By convention, this is a good place to set up fake data during development.
-  //
-  // For example:
-  // ```
-  // // Set up fake development data (or if we already have some, avast)
-  // if (await User.count() > 0) {
-  //   return;
-  // }
-  //
-  // await User.createEach([
-  //   { emailAddress: 'ry@example.com', fullName: 'Ryan Dahl', },
-  //   { emailAddress: 'rachael@example.com', fullName: 'Rachael Shaw', },
-  //   // etc.
-  // ]);
-  // ```
+const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
+module.exports.bootstrap = async function (cb) {
+  global._ = _;
+  global.Bcrypt = Bcrypt;
+  global.Capitalize = capitalize;
+  global.Crypto = Crypto;
+  global.Moment = Moment;
+  global.UUID = uuidv4;
+
+  process
+    .on('unhandledRejection', (reason, p) => {
+      // eslint-disable-next-line no-console
+      console.error(reason, 'Unhandled Rejection at Promise', p);
+    })
+    .on('uncaughtException', (err) => {
+      // eslint-disable-next-line no-console
+      console.error(err, 'Uncaught Exception thrown');
+      process.exit(1);
+    });
+  Raven.config(sails.config.custom.raven.dsn).install();
+  global.ResponseHelper = new ResponseHelper(Raven);
+  cb();
 };

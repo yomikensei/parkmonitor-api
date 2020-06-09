@@ -10,9 +10,10 @@ globals:
   _: false
   sails: false
   Axios: false
-  capitalize: false
-  moment: false
-  crypto: false
+  Capitalize: false
+  Bcrypt: false
+  Crypto: false
+  Moment: false
   Raven: false
   ResponseHelper: false
   UUID: false
