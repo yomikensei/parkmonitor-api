@@ -18,13 +18,11 @@ module.exports = {
       type: 'json',
       required: true,
     },
-    is_occupied: {
-      type: 'boolean',
-      defaultsTo: false,
+    occupied_by: {
+      model: 'Vehicle',
     },
-    user: {
-      type: 'number',
-      allowNull: true,
+    reservation: {
+      model: 'Reservation',
     },
   },
 };

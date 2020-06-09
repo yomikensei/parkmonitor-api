@@ -27,6 +27,10 @@ module.exports = {
       collection: 'Vehicle',
       via: 'user',
     },
+    reservations: {
+      collection: 'Reservation',
+      via: 'user',
+    },
     password: {
       type: 'string',
     },
