@@ -16,7 +16,7 @@ module.exports = {
     },
     code: {
       type: 'string',
-      required: true
+      required: true,
     },
     occupied_by: {
       model: 'Vehicle',

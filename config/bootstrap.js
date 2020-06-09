@@ -15,6 +15,7 @@ const Crypto = require('crypto');
 const Moment = require('moment');
 const Raven = require('raven');
 const ResponseHelper = require('@dsninjas/response');
+const Schedule = require('node-schedule');
 const { v4: uuidv4 } = require('uuid');
 
 const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
@@ -25,6 +26,7 @@ module.exports.bootstrap = async function (cb) {
   global.Capitalize = capitalize;
   global.Crypto = Crypto;
   global.Moment = Moment;
+  global.Schedule = Schedule;
   global.UUID = uuidv4;
 
   process

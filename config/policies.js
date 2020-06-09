@@ -24,8 +24,11 @@ module.exports.policies = {
     create: ['isAuthorized'],
     list: ['isAuthorized'],
   },
-
   SlotController: {
     '*': true,
+  },
+  ReservationController: {
+    create: ['isAuthorized'],
+    list: ['isAuthorized'],
   },
 };

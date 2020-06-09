@@ -42,7 +42,7 @@ module.exports = {
         page_count: Math.ceil(count / perPage),
         total: count,
       };
-      return ResponseHelper.json(201, res, 'Vehicles retrieved successfully', records, meta);
+      return ResponseHelper.json(200, res, 'Vehicles retrieved successfully', records, meta);
     } catch (e) {
       return ResponseHelper.error(e, res);
     }

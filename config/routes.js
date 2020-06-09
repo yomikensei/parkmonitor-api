@@ -48,4 +48,14 @@ module.exports.routes = {
     controller: 'SlotController',
     action: 'list',
   },
+
+  // Reservation
+  'POST /reservation': {
+    controller: 'ReservationController',
+    action: 'create',
+  },
+  'GET /reservation': {
+    controller: 'ReservationController',
+    action: 'list',
+  },
 };

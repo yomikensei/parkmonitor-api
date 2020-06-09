@@ -11,11 +11,16 @@ module.exports = {
     user: {
       model: 'User',
     },
-    duration: {
-      type: 'number',
-    },
     slot: {
       model: 'Slot',
+    },
+    code: {
+      type: 'string',
+    },
+    duration: {
+      type: 'number',
+      required: true,
+      min: 1,
     },
     status: {
       type: 'string',
