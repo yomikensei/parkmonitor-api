@@ -38,4 +38,14 @@ module.exports.routes = {
     controller: 'VehicleController',
     action: 'list',
   },
+
+  // Slot
+  'POST /slot': {
+    controller: 'SlotController',
+    action: 'create',
+  },
+  'GET /slot': {
+    controller: 'SlotController',
+    action: 'list',
+  },
 };

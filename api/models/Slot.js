@@ -14,9 +14,9 @@ module.exports = {
       type: 'string',
       required: true,
     },
-    coordinates: {
-      type: 'json',
-      required: true,
+    code: {
+      type: 'string',
+      required: true
     },
     occupied_by: {
       model: 'Vehicle',

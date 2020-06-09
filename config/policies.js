@@ -24,4 +24,8 @@ module.exports.policies = {
     create: ['isAuthorized'],
     list: ['isAuthorized'],
   },
+
+  SlotController: {
+    '*': true,
+  },
 };
