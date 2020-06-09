@@ -7,6 +7,11 @@ module.exports = {
       url: process.env.MONGO_URL,
     },
   },
+  custom: {
+    raven: {
+      dsn: process.env.SENTRY_DSN
+    },
+  },
   models: {
     datastore: 'mongo',
     migrate: 'safe',
