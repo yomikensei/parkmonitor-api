@@ -23,6 +23,10 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    vehicles: {
+      collection: 'Vehicle',
+      via: 'user',
+    },
     password: {
       type: 'string',
     },
