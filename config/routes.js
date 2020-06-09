@@ -28,4 +28,14 @@ module.exports.routes = {
     controller: 'UserController',
     action: 'list',
   },
+
+  // Vehicle
+  'POST /vehicle': {
+    controller: 'VehicleController',
+    action: 'create',
+  },
+  'GET /vehicle': {
+    controller: 'VehicleController',
+    action: 'list',
+  },
 };

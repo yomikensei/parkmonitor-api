@@ -20,4 +20,8 @@ module.exports.policies = {
     read: ['isAuthorized'],
     list: ['isAuthorized'],
   },
+  VehicleController: {
+    create: ['isAuthorized'],
+    list: ['isAuthorized'],
+  },
 };

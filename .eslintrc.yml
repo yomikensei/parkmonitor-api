@@ -22,6 +22,7 @@ globals:
   #Models
   User: false
   Vehicle: false
+  Reservation: false
   Slot: false
 rules:
   max-len:
