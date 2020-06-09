@@ -14,15 +14,13 @@ module.exports = {
   signup: async (req, res) => {
     try {
       const { email } = req.body;
-      const userExists = await User.findOne({ email });
-      if (userExists) {
-        return res.json(400, { err: 'Email already taken' });
-      }
-      const _user = await User.create(req.body).fetch();
-      const token = TokenService.sign(_user);
-      const user = await User.updateOne({ id: _user.id }).set({ token });
-      const payload = { user, token };
-      return res.json(payload);
+      const user_exists = await User.findOne({ email });
+      if (user_exists) return ResponseHelper.json(400, res, 'Email already taken');
+      let user = await User.create({ ...req.body }).fetch();
+      user = { ...user };
+      delete user.password;
+      const token = TokenService.sign({ user });
+      return ResponseHelper.json(201, res, 'User registered successfully', { user, token });
     } catch (e) {
       return ResponseHelper.error(e, res);
     }

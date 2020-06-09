@@ -40,3 +40,4 @@ rules:
   nonblock-statement-body-position: off
   curly: off
   implicit-arrow-linebreak: off
+  spaced-comment: off

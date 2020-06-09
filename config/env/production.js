@@ -5,7 +5,7 @@ module.exports = {
     mongo: {
       adapter: require('sails-mongo'),
       url: process.env.MONGO_URL,
-    }
+    },
   },
   models: {
     datastore: 'mongo',
@@ -19,9 +19,17 @@ module.exports = {
   session: {
     cookie: {
       secure: true,
-    }
+    },
   },
   sockets: {
     onlyAllowOrigins: [],
-  }
+  },
+  security: {
+    cors: {
+      allRoutes: true,
+      allowOrigins: '*',
+      allowCredentials: false,
+      allowRequestHeaders: '*',
+    },
+  },
 };

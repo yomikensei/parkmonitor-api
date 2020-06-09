@@ -9,50 +9,43 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
   fetchRecordsOnUpdate: true,
-
   attributes: {
-    'name': {
+    name_first: {
       type: 'string',
-      required: true
+      required: true,
     },
-    'email': {
+    name_last: {
       type: 'string',
+      required: true,
+    },
+    email: {
       unique: true,
-      required: true
-    },
-    'remainingTime': {
-      type: 'number',
-      defaultsTo: 0,
-    },
-    'token': {
       type: 'string',
-      allowNull: true,
+      required: true,
     },
-    'password': {
+    password: {
       type: 'string',
     },
   },
-
-  beforeCreate: function (values, cb) {
-    if (!values.prepass || !values.confirmation || values.prepass !== values.confirmation) {
-      return cb({
-        err: ['Password does not match confirmation']
-      });
-    }
-    bcrypt.hash(values.prepass, 10, (err, hash) => {
-      if (err) {
-        return cb(err);
-      }
+  beforeCreate: (values, cb) => {
+    bcrypt.hash(values.password, 10, (err, hash) => {
+      if (err) return cb(err);
+      // eslint-disable-next-line no-param-reassign
       values.password = hash;
-      delete values.prepass;
-      delete values.confirmation;
-
       cb();
     });
   },
-  customToJSON: function () {
-    return _.omit(this, ['password', 'token']);
+  beforeUpdate(values, cb) {
+    if (values.password) {
+      bcrypt.hash(values.password, 10, (err, hash) => {
+        if (err) return cb(err);
+        // eslint-disable-next-line no-param-reassign
+        values.password = hash;
+        cb();
+      });
+    } else cb();
   },
-
+  customToJSON() {
+    return _.omit(this, ['password']);
+  },
 };
-
