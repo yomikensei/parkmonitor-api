@@ -1,1 +1,6 @@
-
+/tasks/
+/test/
+/assets/
+/coverage/
+/app.js
+/Gruntfile.js
