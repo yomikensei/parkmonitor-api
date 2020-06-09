@@ -24,4 +24,8 @@ module.exports.routes = {
     controller: 'UserController',
     action: 'read',
   },
+  'GET /user/all': {
+    controller: 'UserController',
+    action: 'list',
+  },
 };

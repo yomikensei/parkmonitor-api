@@ -10,22 +10,21 @@ module.exports = {
   fetchRecordsOnUpdate: true,
 
   attributes: {
-    'label': {
+    label: {
       type: 'string',
-      required: true
+      required: true,
     },
-    'coordinates': {
+    coordinates: {
       type: 'json',
-      required: true
+      required: true,
     },
-    'isOccupied': {
+    is_occupied: {
       type: 'boolean',
       defaultsTo: false,
     },
-    'user': {
+    user: {
       type: 'number',
       allowNull: true,
     },
   },
-
 };

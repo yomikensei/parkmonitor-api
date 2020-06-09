@@ -17,6 +17,7 @@ module.exports.policies = {
   },
 
   UserController: {
-    read: ['isAuthorized'], // We dont need authorization here, allowing public access
+    read: ['isAuthorized'],
+    list: ['isAuthorized'],
   },
 };
